@@ -33,7 +33,7 @@ print(code_answer)
 # writing to file
  
 # Opening a file
-file1 = open('../../.github/workflows/s3-website.yml', 'w')
+file1 = open('../.github/workflows/s3-website.yml', 'w')
 #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
 s = code_answer
  
@@ -48,6 +48,6 @@ file1.write(s)
 file1.close()
  
 # Writing readme file
-file2 = open('../../s3-website/README.md', 'w')
+file2 = open('../s3-website/README.md', 'w')
 file2.write(tokens[0] + tokens[2])
 file2.close()
