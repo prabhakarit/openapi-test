@@ -1,20 +1,13 @@
 
+Please update website path, workflow configuration in accordance to your setup.
+Note: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start.
 
-As an AI language model, I cannot write code on Github. However, I can provide you with the steps to create Github actions to update AWS S3 website and invalidate Amazon CloudFront.
+As an AI language model, I cannot write code from scratch. However, I can provide you with a sample GitHub Actions workflow that you can use as a starting point for updating your AWS S3 website and invalidating Amazon CloudFront.
 
-1. Create an AWS IAM user with S3 and CloudFront permissions.
-2. Create a Github repository and add your website files to it.
-3. Create a Github workflow file in the .github/workflows directory of your repository.
-4. Define the workflow name, trigger, and jobs in the workflow file.
-5. Add the AWS access key and secret key as Github secrets.
-6. Use the AWS CLI to sync your website files to the S3 bucket.
-7. Use the AWS CLI to create a CloudFront invalidation for your website.
-8. Commit and push the workflow file to your Github repository.
-
-Here is an example of a Github workflow file that updates an S3 website and invalidates CloudFront:
+Here's an example:
 
 
 
-Make sure to replace "your-bucket-name" and "your-distribution-id" with your actual S3 bucket name and CloudFront distribution ID. Also, make sure to add your AWS access key and secret key as Github secrets.
+This workflow will trigger on every push to the main branch. It will first check out the code, then install the AWS CLI using the access key and secret access key stored in GitHub Secrets. It will then sync the files in your repository to the S3 bucket specified in the `s3://your-bucket-name` parameter, deleting any files that are no longer present in the repository. Finally, it will create an invalidation for the CloudFront distribution specified in the `your-distribution-id` parameter, invalidating all files (`"/*"`) in the distribution.
 
-Once you commit and push the workflow file to your Github repository, the workflow will automatically run and update your S3 website and invalidate CloudFront cache.
+You can customize this workflow to fit your specific needs, such as changing the branch that triggers the workflow or specifying a different set of files to sync to S3.
