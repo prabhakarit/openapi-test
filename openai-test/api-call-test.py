@@ -51,3 +51,8 @@ file1.close()
 file2 = open('../s3-website/README.md', 'w')
 file2.write(tokens[0] + tokens[2])
 file2.close()
+
+# Writing readme file
+file3 = open('../s3-website/index.html', 'w')
+file3.write('<html><body><h2>Hello World !</h2></body></html>')
+file3.close()
