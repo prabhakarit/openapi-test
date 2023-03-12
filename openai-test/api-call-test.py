@@ -48,10 +48,10 @@ file1.write(s)
 file1.close()
 
 guidance = "\nPlease update website path, workflow configuration in accordance to your setup.\nNote: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start."
- 
+msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
 # Writing readme file
 file2 = open('../s3-website/README.md', 'w')
-file2.write(guidance + tokens[0] + tokens[2])
+file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
 file2.close()
 
 # Writing readme file
