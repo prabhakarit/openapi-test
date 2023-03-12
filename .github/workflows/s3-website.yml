@@ -1,5 +1,5 @@
 
-name: Deploy to S3 and Invalidate CloudFront
+name: Update S3 website and invalidate CloudFront
 
 on:
   push:
@@ -11,22 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip3 install awscli --upgrade --user
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip3 install awscli --upgrade --user
 
-      - name: Deploy to S3
-        run: |
-          aws s3 sync . s3://your-bucket-name --delete --exclude ".git/*"
+    - name: Sync website files to S3
+      run: |
+        aws s3 sync . s3://your-bucket-name --delete --exclude ".git/*"
 
-      - name: Invalidate CloudFront
-        run: |
-          aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Invalidate CloudFront cache
+      run: |
+        aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
