@@ -1,0 +1,77 @@
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: write # required to checkout the code from the repo
+name: openai-basic
+# on:
+#     push:
+#         branches:
+#             - master
+on: 
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'Region'     
+        required: true
+        default: 'ap-south-1'
+        options: ['ap-south-1']
+        type: choice
+      project:
+        description: 'project name ?'     
+        required: true
+        default: 's3-website'
+        type: string
+      requirement:
+        description: 'Requirement ?'     
+        required: true
+        default: 'write github actions to update to AWS s3 website and invalidate amazon cloudfront'
+        type: string
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      strategy:
+            matrix:
+                node-version: [16.x]
+      steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::539016438966:role/github_role
+          role-duration-seconds: 900 # the ttl of the session, in seconds.
+          aws-region: ${{ github.event.inputs.region }}
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+      - name: Install python
+        run: |
+          echo ${{secrets.GITHUB_TOKEN}}
+          echo ${{secrets.WORKFLOW_TOKEN}}
+          cd ./openai-test
+          # Upgrading python to 3.9
+          echo "installing pip"
+          sudo apt-get install python3
+          sudo apt install python3-pip
+          pip install --upgrade pip
+          pip3.10 install aiohttp
+          pip3.10 install --ignore-installed pyOpenSSL==22.0.0
+          pip3.10 install openai
+          touch ../.github/workflows/s3-wesbite.yml
+          mkdir ../s3-website
+          touch ../s3-website/README.md
+          export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          python3  api-call-test.py
+          cd ../
+      - name: Set up Git user
+        run: |
+          git config --global user.name "prabhakarit"
+          git config --global user.email "prabhakar.borah@gmail.com"
+      - name: Add and commit changes
+        run: |
+          git add .
+          git commit -m "Auto-commit: ${{ github.event.head_commit.message }}"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
