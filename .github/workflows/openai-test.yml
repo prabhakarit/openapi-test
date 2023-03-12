@@ -56,10 +56,22 @@ jobs:
           pip3.10 install aiohttp
           pip3.10 install --ignore-installed pyOpenSSL==22.0.0
           pip3.10 install openai
-          touch ../.github/workflows/s3-wesbite.yml
-          mkdir ../s3-website
-          touch ../s3-website/README.md
-          touch ../s3-website/index.html
+          if [[ ! -f ../.github/workflows/s3-wesbite.yml ]]
+          then
+              touch ../.github/workflows/s3-wesbite.yml
+          fi
+          if [[ ! -f ../s3-website ]]
+          then
+              touch ../s3-website
+          fi
+          if [[ ! -f ../s3-website/README.md ]]
+          then
+              touch ../s3-website/README.md
+          fi
+          if [[ ! -f ../s3-website/index.html ]]
+          then
+              touch ../s3-website/index.html
+          fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           python3  api-call-test.py
           cd ../
