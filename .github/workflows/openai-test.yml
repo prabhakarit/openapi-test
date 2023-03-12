@@ -59,6 +59,7 @@ jobs:
           touch ../.github/workflows/s3-wesbite.yml
           mkdir ../s3-website
           touch ../s3-website/README.md
+          touch ../s3-website/index.html
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           python3  api-call-test.py
           cd ../
