@@ -18,12 +18,12 @@ on:
       project:
         description: 'project name ?'     
         required: true
-        default: 's3-website'
+        default: 's3-website-infra'
         type: string
       requirement:
         description: 'Requirement ?'     
         required: true
-        default: 'write github actions to update to AWS s3 website and invalidate amazon cloudfront'
+        default: 'terraform main script to create AWS s3 website bucket'
         type: string
 
 jobs:
