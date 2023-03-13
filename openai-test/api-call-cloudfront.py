@@ -3,7 +3,7 @@ import os
 import sys
 
 # argument
-query = "terraform main script to create AWS s3 website bucket"
+query = "terraform main script to create cloudfront distribution for s3 website"
 # if query:
 #     # nothing to do
 #     print('query received = ', query)
@@ -33,7 +33,7 @@ print(code_answer)
 # writing to file
  
 # Opening a file
-file1 = open('../s3-website-infra/main.tf', 'w')
+file1 = open('../s3-website-cloudfront/main.tf', 'w')
 #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
 s = code_answer
  
@@ -50,7 +50,7 @@ file1.close()
 guidance = "\nPlease update website path, terraform configuration in accordance to your setup.\nNote: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start."
 msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
 # Writing readme file
-file2 = open('../s3-website-infra/README.md', 'w')
+file2 = open('../s3-website-cloudfront/README.md', 'w')
 file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
 file2.close()
 
