@@ -3,7 +3,7 @@ import os
 import sys
 
 # argument
-query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"
+query = "terraform main script to create AWS s3 website bucket"
 # if query:
 #     # nothing to do
 #     print('query received = ', query)
