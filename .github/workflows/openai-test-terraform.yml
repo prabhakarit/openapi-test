@@ -62,7 +62,7 @@ jobs:
           # fi
           if [[ ! -f ../s3-website-infra ]]
           then
-              touch ../s3-website-infra
+              mkdir ../s3-website-infra
           fi
           if [[ ! -f ../s3-website-infra/README.md ]]
           then
