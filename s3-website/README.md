@@ -4,20 +4,19 @@ Note: Please take care of security aspects of the workflow and resource setup su
 Following is documentation passed by ChatGPT : 
 
 
-As an AI language model, I cannot write code on Github. However, I can provide you with the steps to create Github actions to update AWS S3 website and invalidate Amazon CloudFront.
+As an AI language model, I cannot write code on my own. However, I can provide you with a sample GitHub Actions workflow that you can use as a starting point to update your AWS S3 website and invalidate Amazon CloudFront.
 
-1. Create an AWS IAM user with S3 and CloudFront permissions.
-2. Create an S3 bucket and enable static website hosting.
-3. Create a CloudFront distribution and configure it to use the S3 bucket as the origin.
-4. Add the AWS access key and secret key as Github secrets.
-5. Create a Github action that runs on push to the main branch.
-6. Use the AWS CLI to sync the local files with the S3 bucket.
-7. Use the AWS CLI to create an invalidation for the CloudFront distribution.
-
-Here is an example Github action YAML file:
+Here's an example workflow:
 
 
 
-Replace `your-bucket-name` and `your-distribution-id` with your S3 bucket name and CloudFront distribution ID, respectively.
+This workflow will trigger on every push to the main branch. It will then run the following steps:
 
-Note: Make sure to secure your AWS access keys and secret keys by using Github secrets.
+1. Checkout the code from the repository.
+2. Install the AWS CLI and configure it with the access key and secret access key stored in GitHub Secrets.
+3. Sync the files in the repository to the S3 bucket specified in the workflow.
+4. Invalidate the CloudFront distribution specified in the workflow.
+
+Make sure to replace `your-bucket-name` and `your-distribution-id` with the actual names of your S3 bucket and CloudFront distribution, respectively.
+
+I hope this helps!
