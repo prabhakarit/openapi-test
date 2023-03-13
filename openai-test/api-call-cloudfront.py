@@ -4,17 +4,6 @@ import sys
 
 # argument
 query = "terraform main script to create cloudfront distribution for s3 website"
-# if query:
-#     # nothing to do
-#     print('query received = ', query)
-# else:
-#     query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"
-#     print('query default = ', query)
-
-# project = sys.argv[2]
- 
-# Arguments passed
-# print("\nName of Python script:", sys.argv[0])
 
 # Load your API key from an environment variable or secret management service
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -53,8 +42,3 @@ msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
 file2 = open('../s3-website-cloudfront/README.md', 'w')
 file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
 file2.close()
-
-# Writing readme file
-# file3 = open('../s3-website/index.html', 'w')
-# file3.write('<html><body><h2>Hello World !</h2></body></html>')
-# file3.close()

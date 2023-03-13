@@ -4,17 +4,6 @@ import sys
 
 # argument
 query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"
-# if query:
-#     # nothing to do
-#     print('query received = ', query)
-# else:
-#     query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"
-#     print('query default = ', query)
-
-# project = sys.argv[2]
- 
-# Arguments passed
-# print("\nName of Python script:", sys.argv[0])
 
 # Load your API key from an environment variable or secret management service
 openai.api_key = os.getenv("OPENAI_API_KEY")

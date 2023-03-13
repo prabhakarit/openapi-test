@@ -1,0 +1,98 @@
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: write # required to checkout the code from the repo
+name: openai-project s3 cloudfront website deploy
+# on:
+#     push:
+#         branches:
+#             - master
+on: 
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'Region'     
+        required: true
+        default: 'ap-south-1'
+        options: ['ap-south-1']
+        type: choice
+      project:
+        description: 'project name ?'     
+        required: true
+        default: 'project-s3-website-cloudfront'
+        type: string
+      requirement:
+        description: 'Requirement ?'     
+        required: true
+        default: 'Setup project template for s3 webhosting w/ cloudfront. Include actions workflow for provisioning and deployment'
+        type: string
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      strategy:
+            matrix:
+                node-version: [16.x]
+      steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::539016438966:role/github_role
+          role-duration-seconds: 900 # the ttl of the session, in seconds.
+          aws-region: ${{ github.event.inputs.region }}
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+      - name: Install python
+        run: |
+          cd ./openai-test
+          # Upgrading python to 3.9
+          echo "installing pip"
+          sudo apt-get install python3
+          sudo apt install python3-pip
+          pip install --upgrade pip
+          pip3.10 install aiohttp
+          pip3.10 install --ignore-installed pyOpenSSL==22.0.0
+          pip3.10 install openai
+          if [[ ! -d ../projects/s3-website-with-cloudfront ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront
+          fi
+          if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml ]]
+          then
+              touch ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml
+          fi
+          if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml ]]
+          then
+              touch ../projects/s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml
+          fi
+          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-s3 ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront/terraform-s3
+          fi
+          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-cloudfront ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront/terraform-cloudfront
+          fi
+          if [[ ! -f ../projects/s3-website-with-cloudfront/website ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront/website
+          fi
+          export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          python3  api-call-project-s3-cloudfront.py
+          cd ../projects/
+          zip -r s3-website-with-cloudfront.zip ./s3-website-with-cloudfront
+          cd ../
+      - name: Set up Git user
+        run: |
+          git config --global user.name "prabhakarit"
+          git config --global user.email "prabhakar.borah@gmail.com"
+      - name: Add and commit changes
+        run: |
+          git add ./projects/s3-website-with-cloudfront.zip
+          git commit -m "Auto-commit: ${{ github.event.inputs.requirement }}"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
