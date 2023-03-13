@@ -8,4 +8,4 @@ Here is an example Terraform script to create a CloudFront distribution for an S
 
 
 
-This script creates an S3 bucket for the website, sets up the website configuration, and creates a CloudFront distribution that points to the S3 bucket. The CloudFront distribution is configured to use HTTPS and to cache content for up to 24 hours. The script also outputs the CloudFront distribution domain name, which can be used to access the website.
+This script creates an S3 bucket for the website, sets up the website configuration, and creates a CloudFront distribution that points to the S3 bucket. The CloudFront distribution is configured to use HTTPS, cache content for up to 24 hours, and restrict access to specific geographic regions (in this case, none).

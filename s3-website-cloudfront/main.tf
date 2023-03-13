@@ -24,7 +24,6 @@ resource "aws_cloudfront_distribution" "website_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "Example website distribution"
   default_root_object = "index.html"
 
   default_cache_behavior {
@@ -57,9 +56,4 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
-}
-
-# Output the CloudFront distribution domain name
-output "website_distribution_domain_name" {
-  value = aws_cloudfront_distribution.website_distribution.domain_name
 }
