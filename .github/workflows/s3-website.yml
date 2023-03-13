@@ -20,9 +20,9 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install awscli --upgrade --user
 
-      - name: Deploy to S3
+      - name: Sync files to S3
         run: |
-          aws s3 sync . s3://your-bucket-name --delete
+          aws s3 sync . s3://your-bucket-name --delete --exclude ".git/*"
 
       - name: Invalidate CloudFront
         run: |
