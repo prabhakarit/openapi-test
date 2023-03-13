@@ -1,7 +1,7 @@
 permissions:
   id-token: write # required to use OIDC authentication
   contents: write # required to checkout the code from the repo
-name: openai-action
+name: openai-action s3 website deploy
 # on:
 #     push:
 #         branches:
