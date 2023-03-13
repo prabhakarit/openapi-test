@@ -58,7 +58,7 @@ jobs:
           # then
           #     touch ../.github/workflows/s3-wesbite-terraform.yml
           # fi
-          if [[ ! -f ../s3-website-cloudfront ]]
+          if [[ ! -d ../s3-website-cloudfront ]]
           then
               mkdir ../s3-website-cloudfront
           fi

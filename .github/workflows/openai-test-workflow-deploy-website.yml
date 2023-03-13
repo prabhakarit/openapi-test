@@ -60,9 +60,9 @@ jobs:
           then
               touch ../.github/workflows/s3-wesbite.yml
           fi
-          if [[ ! -f ../s3-website ]]
+          if [[ ! -d ../s3-website ]]
           then
-              touch ../s3-website
+              mkdir ../s3-website
           fi
           if [[ ! -f ../s3-website/README.md ]]
           then
