@@ -1,12 +1,10 @@
 
-# Define the AWS provider
 provider "aws" {
   region = "us-east-1"
 }
 
-# Define the S3 bucket for the website
-resource "aws_s3_bucket" "website_bucket" {
-  bucket = "example-website-bucket"
+resource "aws_s3_bucket" "website" {
+  bucket = "example-website"
   acl    = "public-read"
 
   website {
@@ -15,21 +13,25 @@ resource "aws_s3_bucket" "website_bucket" {
   }
 }
 
-# Define the CloudFront distribution
-resource "aws_cloudfront_distribution" "website_distribution" {
+resource "aws_cloudfront_origin_access_identity" "s3" {
+  comment = "Access identity for S3 bucket"
+}
+
+resource "aws_cloudfront_distribution" "website" {
   origin {
-    domain_name = aws_s3_bucket.website_bucket.website_endpoint
-    origin_id   = "S3-${aws_s3_bucket.website_bucket.id}"
+    domain_name = aws_s3_bucket.website.website_endpoint
+    origin_id   = "S3-${aws_s3_bucket.website.id}"
   }
 
   enabled             = true
   is_ipv6_enabled     = true
+  comment             = "CloudFront distribution for example website"
   default_root_object = "index.html"
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-${aws_s3_bucket.website_bucket.id}"
+    target_origin_id = "S3-${aws_s3_bucket.website.id}"
 
     forwarded_values {
       query_string = false
@@ -45,7 +47,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     max_ttl                = 86400
   }
 
-  price_class = "PriceClass_100"
+  price_class = "PriceClass_All"
 
   restrictions {
     geo_restriction {
@@ -55,5 +57,9 @@ resource "aws_cloudfront_distribution" "website_distribution" {
 
   viewer_certificate {
     cloudfront_default_certificate = true
+  }
+
+  tags = {
+    Environment = "Production"
   }
 }
