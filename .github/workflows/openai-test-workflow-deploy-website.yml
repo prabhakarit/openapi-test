@@ -56,9 +56,9 @@ jobs:
           pip3.10 install aiohttp
           pip3.10 install --ignore-installed pyOpenSSL==22.0.0
           pip3.10 install openai
-          if [[ ! -f ../.github/workflows/s3-wesbite.yml ]]
+          if [[ ! -f ../.github/workflows/s3-website.yml ]]
           then
-              touch ../.github/workflows/s3-wesbite.yml
+              touch ../.github/workflows/s3-website.yml
           fi
           if [[ ! -d ../s3-website ]]
           then
