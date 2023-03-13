@@ -4,10 +4,16 @@ Note: Please take care of security aspects of the workflow and resource setup su
 Following is documentation passed by ChatGPT : 
 
 
-As an AI language model, I cannot write code from scratch. However, I can provide you with a sample GitHub Actions workflow that you can use as a starting point for your project. Here's an example:
+As an AI language model, I cannot write code on my own. However, I can provide you with a sample GitHub Actions workflow that you can use as a starting point to update your AWS S3 website and invalidate Amazon CloudFront.
+
+Here's an example:
 
 
 
-This workflow will trigger on every push to the `main` branch. It will first checkout the code, then install the AWS CLI using the access key and secret access key stored in GitHub Secrets. It will then sync the files in the current directory to the S3 bucket specified in the `s3://your-bucket-name` parameter, deleting any files in the bucket that are not in the current directory. Finally, it will invalidate the CloudFront cache for the distribution specified in the `your-distribution-id` parameter, which will ensure that the updated files are served to users.
+This workflow will trigger on every push to the `main` branch. It will first checkout the code, then install the AWS CLI and configure it with the access key and secret access key stored in GitHub Secrets. 
 
-You will need to replace the `your-bucket-name` and `your-distribution-id` parameters with your own values. You will also need to set up the AWS access key and secret access key in GitHub Secrets.
+Next, it will sync the files in the current directory to the S3 bucket specified in the `s3://your-bucket-name` parameter. The `--delete` flag will ensure that any files that have been removed from the repository are also deleted from the S3 bucket.
+
+Finally, it will create an invalidation for the CloudFront distribution specified in the `your-distribution-id` parameter. The `/*` path will invalidate all files in the distribution.
+
+You can customize this workflow to fit your specific needs, such as triggering on a different branch or using a different path for the S3 bucket.
