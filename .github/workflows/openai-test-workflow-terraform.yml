@@ -59,7 +59,7 @@ jobs:
               touch ../.github/workflows/terraform-deploy.yml
           fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          python3  api-call-cloudfront.py
+          python3  api-call-workflow-terraform.py
           cd ../
       - name: Set up Git user
         run: |
