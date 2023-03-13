@@ -8,4 +8,4 @@ Here is an example Terraform script to create an AWS S3 website bucket:
 
 
 
-This script creates an S3 bucket named "example-website-bucket" with public read access and sets the index and error documents for the website. It also adds a bucket policy to allow public read access to the objects in the bucket. You can customize the bucket name, region, and other settings as needed.
+This script creates an S3 bucket named "example-website-bucket" with public read access and a website configuration that specifies "index.html" as the index document and "error.html" as the error document. It also adds a bucket policy that allows public read access to all objects in the bucket. Finally, it adds a tag to the bucket with the name "Example Website Bucket".
