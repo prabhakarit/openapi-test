@@ -33,7 +33,7 @@ print(code_answer)
 # writing to file
  
 # Opening a file
-file1 = open('../.github/worklows/terraform-deploy.yml', 'w')
+file1 = open('../.github/workflows/terraform-deploy.yml', 'w')
 #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
 s = code_answer
  
