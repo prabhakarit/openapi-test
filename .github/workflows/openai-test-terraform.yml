@@ -45,8 +45,6 @@ jobs:
           token: ${{ secrets.WORKFLOW_TOKEN }}
       - name: Install python
         run: |
-          echo ${{secrets.GITHUB_TOKEN}}
-          echo ${{secrets.WORKFLOW_TOKEN}}
           cd ./openai-test
           # Upgrading python to 3.9
           echo "installing pip"
