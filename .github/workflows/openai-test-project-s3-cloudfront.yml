@@ -54,9 +54,9 @@ jobs:
           pip3.10 install aiohttp
           pip3.10 install --ignore-installed pyOpenSSL==22.0.0
           pip3.10 install openai
-          if [[ ! -d ../projects/s3-website-with-cloudfront ]]
+          if [[ ! -d ../projects/s3-website-with-cloudfront/ ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront
+              mkdir ../projects/s3-website-with-cloudfront/
           fi
           if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml ]]
           then
