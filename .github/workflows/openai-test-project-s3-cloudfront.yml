@@ -62,6 +62,14 @@ jobs:
           then
               mkdir ../projects/s3-website-with-cloudfront
           fi
+          if [[ ! -d ../projects/s3-website-with-cloudfront/.github ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront/.github
+          fi
+          if [[ ! -d ../projects/s3-website-with-cloudfront/.github/workflows ]]
+          then
+              mkdir ../projects/s3-website-with-cloudfront/.github/workflows
+          fi
           if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml ]]
           then
               touch ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml
