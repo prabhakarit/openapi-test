@@ -84,11 +84,11 @@ jobs:
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/terraform-s3/main.tf ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/terraform-s3/main.tf
+              touch ../projects/${{ github.event.inputs.project }}/terraform-s3/main.tf
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/terraform-s3/README.md ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/terraform-s3/README.md
+              touch ../projects/${{ github.event.inputs.project }}/terraform-s3/README.md
           fi
           if [[ ! -d ../projects/${{ github.event.inputs.project }}/terraform-cloudfront ]]
           then
@@ -96,11 +96,11 @@ jobs:
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/main.tf ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/main.tf
+              touch ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/main.tf
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/README.md ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/README.md
+              touch ../projects/${{ github.event.inputs.project }}/terraform-cloudfront/README.md
           fi
           if [[ ! -d ../projects/${{ github.event.inputs.project }}/website ]]
           then
@@ -108,11 +108,11 @@ jobs:
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/website/README.md ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/website/README.md
+              touch ../projects/${{ github.event.inputs.project }}/website/README.md
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/website/index.html ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/website/index.html
+              touch ../projects/${{ github.event.inputs.project }}/website/index.html
           fi
           if [[ ! -d ../projects/${{ github.event.inputs.project }}/s3-website-infra ]]
           then
@@ -120,11 +120,11 @@ jobs:
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/s3-website-infra/main.tf ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/s3-website-infra/main.tf
+              touch ../projects/${{ github.event.inputs.project }}/s3-website-infra/main.tf
           fi
           if [[ ! -f ../projects/${{ github.event.inputs.project }}/s3-website-infra/README.md ]]
           then
-              mkdir ../projects/${{ github.event.inputs.project }}/s3-website-infra/README.md
+              touch ../projects/${{ github.event.inputs.project }}/s3-website-infra/README.md
           fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           python3  api-call-project-s3-cloudfront.py
