@@ -5,6 +5,7 @@ import sys
 # Load your API key from an environment variable or secret management service
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
 def terraform_s3():
     # argument
     query = "terraform main script to create AWS s3 website bucket"
@@ -23,7 +24,7 @@ def terraform_s3():
     # writing to file
     
     # Opening a file
-    file1 = open('../s3-website-infra/main.tf', 'w')
+    file1 = open('../projects/project-s3-website-cloudfront/s3-website-infra/main.tf', 'w')
     #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
     s = code_answer
     
@@ -40,7 +41,7 @@ def terraform_s3():
     guidance = "\nPlease update website path, terraform configuration in accordance to your setup.\nNote: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open('../s3-website-infra/README.md', 'w')
+    file2 = open('../projects/project-s3-website-cloudfront/s3-website-infra/README.md', 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
@@ -62,7 +63,7 @@ def action_terraform_deploy():
     # writing to file
     
     # Opening a file
-    file1 = open('../.github/workflows/terraform-deploy.yml', 'w')
+    file1 = open('../projects/project-s3-website-cloudfront/.github/workflows/terraform-deploy.yml', 'w')
     #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
     s = code_answer
     
@@ -90,7 +91,7 @@ def terraform_cloudfront():
     # writing to file
     
     # Opening a file
-    file1 = open('../s3-website-cloudfront/main.tf', 'w')
+    file1 = open('../projects/project-s3-website-cloudfront/s3-website-cloudfront/main.tf', 'w')
     #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
     s = code_answer
     
@@ -107,7 +108,7 @@ def terraform_cloudfront():
     guidance = "\nPlease update website path, terraform configuration in accordance to your setup.\nNote: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open('../s3-website-cloudfront/README.md', 'w')
+    file2 = open('../projects/project-s3-website-cloudfront/s3-website-cloudfront/README.md', 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
@@ -129,7 +130,7 @@ def action_deploy_s3website():
     # writing to file
     
     # Opening a file
-    file1 = open('../.github/workflows/s3-website.yml', 'w')
+    file1 = open('../projects/project-s3-website-cloudfront/.github/workflows/s3-website.yml', 'w')
     #L = ["This is Delhi \n", "This is Paris \n", "This is London \n"]
     s = code_answer
     
@@ -146,12 +147,12 @@ def action_deploy_s3website():
     guidance = "\nPlease update website path, workflow configuration in accordance to your setup.\nNote: Please take care of security aspects of the workflow and resource setup such as S3, cloudfront. This is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open('../s3-website/README.md', 'w')
+    file2 = open('../projects/project-s3-website-cloudfront/s3-website/README.md', 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
     # Writing readme file
-    file3 = open('../s3-website/index.html', 'w')
+    file3 = open('../projects/project-s3-website-cloudfront/s3-website/index.html', 'w')
     file3.write('<html><body><h2>Hello World !</h2></body></html>')
     file3.close()
 

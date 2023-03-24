@@ -58,66 +58,66 @@ jobs:
           then
               mkdir ../projects
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront
+              mkdir ../projects/project-s3-website-with-cloudfront
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront/.github ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront/.github ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/.github
+              mkdir ../projects/project-s3-website-with-cloudfront/.github
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront/.github/workflows ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront/.github/workflows ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/.github/workflows
+              mkdir ../projects/project-s3-website-with-cloudfront/.github/workflows
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml ]]
           then
-              touch ../projects/s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml
+              touch ../projects/project-s3-website-with-cloudfront/.github/workflows/deploy-terraform.yml
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml ]]
           then
-              touch ../projects/s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml
+              touch ../projects/project-s3-website-with-cloudfront/.github/workflows/deploy-s3-website.yml
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront/terraform-s3 ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront/terraform-s3 ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-s3
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-s3
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-s3/main.tf ]]
+          if [[ ! -f ../projects/project-project-s3-website-with-cloudfront/terraform-s3/main.tf ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-s3/main.tf
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-s3/main.tf
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-s3/README.md ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/terraform-s3/README.md ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-s3/README.md
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-s3/README.md
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront/terraform-cloudfront ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront/terraform-cloudfront ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-cloudfront
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-cloudfront
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-cloudfront/main.tf ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/terraform-cloudfront/main.tf ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-cloudfront/main.tf
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-cloudfront/main.tf
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/terraform-cloudfront/README.md ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/terraform-cloudfront/README.md ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/terraform-cloudfront/README.md
+              mkdir ../projects/project-s3-website-with-cloudfront/terraform-cloudfront/README.md
           fi
-          if [[ ! -d ../projects/s3-website-with-cloudfront/website ]]
+          if [[ ! -d ../projects/project-s3-website-with-cloudfront/website ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/website
+              mkdir ../projects/project-s3-website-with-cloudfront/website
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/website/README.md ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/website/README.md ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/website/README.md
+              mkdir ../projects/project-s3-website-with-cloudfront/website/README.md
           fi
-          if [[ ! -f ../projects/s3-website-with-cloudfront/website/index.html ]]
+          if [[ ! -f ../projects/project-s3-website-with-cloudfront/website/index.html ]]
           then
-              mkdir ../projects/s3-website-with-cloudfront/website/index.html
+              mkdir ../projects/project-s3-website-with-cloudfront/website/index.html
           fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          #python3  api-call-project-s3-cloudfront.py
+          python3  api-call-project-s3-cloudfront.py
           cd ../projects/
-          zip -r s3-website-with-cloudfront.zip ./s3-website-with-cloudfront
+          zip -r project-s3-website-with-cloudfront.zip ./project-s3-website-with-cloudfront
           cd ../
       - name: Set up Git user
         run: |
@@ -125,7 +125,7 @@ jobs:
           git config --global user.email "prabhakar.borah@gmail.com"
       - name: Add and commit changes
         run: |
-          git add ./projects/s3-website-with-cloudfront.zip
+          git add ./projects/project-s3-website-with-cloudfront.zip
           git commit -m "Auto-commit: ${{ github.event.inputs.requirement }}"
           
       - name: Push changes
