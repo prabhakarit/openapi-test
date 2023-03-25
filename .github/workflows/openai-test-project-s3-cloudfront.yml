@@ -139,6 +139,19 @@ jobs:
           then
               touch ../projects/${{ github.event.inputs.project }}/s3-website-cloudfront/README.md
           fi
+          ##
+          if [[ ! -d ../projects/${{ github.event.inputs.project }}/s3-website ]]
+          then
+              mkdir ../projects/${{ github.event.inputs.project }}/s3-website
+          fi
+          if [[ ! -f ../projects/${{ github.event.inputs.project }}/s3-website/index.html ]]
+          then
+              touch ../projects/${{ github.event.inputs.project }}/s3-website/index.html
+          fi
+          if [[ ! -f ../projects/${{ github.event.inputs.project }}/s3-website/README.md ]]
+          then
+              touch ../projects/${{ github.event.inputs.project }}/s3-website/README.md
+          fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           python3  api-call-project-s3-cloudfront.py
           cd ../projects/
