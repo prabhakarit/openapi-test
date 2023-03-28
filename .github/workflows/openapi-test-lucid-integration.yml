@@ -1,7 +1,7 @@
 permissions:
   id-token: write # required to use OIDC authentication
   contents: write # required to checkout the code from the repo
-name: openai-terraform cloudfront
+name: openapi-lucid basic
 # on:
 #     push:
 #         branches:
