@@ -123,6 +123,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     file2 = open(os.path.join(path, 'README.md'), 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
+
 if isComputePresent == True and isStoragePresent == True:
     # argument
     query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
@@ -150,10 +151,6 @@ if isComputePresent == True and isStoragePresent == True:
     # Writing a string to file
     file1.write(s)
     
-    # Writing multiple strings
-    # at a time
-    #file1.writelines(L)
-    
     # Closing file
     file1.close()
 
@@ -164,3 +161,39 @@ if isComputePresent == True and isStoragePresent == True:
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
+if isAPIAccessPresent == True and isStoragePresent == True:
+    # argument
+    query = "terraform code to deploy "+ storages[0] +" behind " + apiAccesses[0]
+
+    # Load your API key from an environment variable or secret management service
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+
+    completion = openai.ChatCompletion.create(
+    temperature=0.1,
+    model="gpt-3.5-turbo", 
+    messages=[{"role": "user", "content": query}]
+    )
+    answer = completion.choices[0].message.content
+    #print(completion.choices[0].message.content)
+    tokens = answer.split('```')
+    code_answer = tokens[1]
+    print(code_answer)
+    # Python program to demonstrate
+    # writing to file
+    
+    # Opening a file
+    file1 = open(os.path.join(path, 'main.tf'), 'w')
+    s = code_answer
+    
+    # Writing a string to file
+    file1.write(s)
+    
+    # Closing file
+    file1.close()
+
+    guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
+    msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
+    # Writing readme file
+    file2 = open(os.path.join(path, 'README.md'), 'w')
+    file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
+    file2.close()
