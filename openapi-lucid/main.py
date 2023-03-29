@@ -65,6 +65,9 @@ parent_dir = "../projects/lucid/"
 
 # Path
 path = os.path.join(parent_dir, directory)
+isExist = os.path.exists(parent_dir)
+if not isExist:
+    os.mkdir(parent_dir)
 isExist = os.path.exists(path)
 if not isExist:
     os.mkdir(path)
