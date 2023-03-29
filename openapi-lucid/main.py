@@ -39,7 +39,7 @@ with open('../lucid-files/'+directory+'.csv') as csv_file:
     print(f'Resources to be processed {resources}')
 
 api_access = ['Application Load Balancer',  'Amazon API Gateway']
-compute = ["EC2", "AWS Lambda"]
+compute = ["Amazon EC2", "AWS Lambda"]
 storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS"]
 
 apiAccesses = []
@@ -50,7 +50,7 @@ isComputePresent = False
 isAPIAccessPresent = False
 isStoragePresent = False
 for resource in resources:
-    if resource == "AWS Lambda" or resource == "EC2":
+    if resource == "AWS Lambda" or resource == "Amazon EC2":
         computes.append(resource)
         isComputePresent = True
     if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
