@@ -163,7 +163,7 @@ if isComputePresent == True and isStoragePresent == True:
 
 if isAPIAccessPresent == True and isStoragePresent == True:
     # argument
-    query = "terraform code to deploy "+ storages[0] +" behind " + apiAccesses[0]
+    query = "terraform code to create "+ apiAccesses[0] +" and " + storages[0]
 
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
