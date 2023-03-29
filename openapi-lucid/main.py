@@ -40,7 +40,7 @@ with open('../lucid-files/'+directory+'.csv') as csv_file:
 
 api_access = ['Application Load Balancer',  'Amazon API Gateway']
 compute = ["EC2", "AWS Lambda"]
-storage = ["Amazon Simple Storage Service (S3)", "RDS"]
+storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS"]
 
 apiAccesses = []
 computes = []
@@ -56,7 +56,7 @@ for resource in resources:
     if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
         apiAccesses.append(resource)
         isAPIAccessPresent = True
-    if resource == "Amazon Simple Storage Service (S3)" or resource == "RDS":
+    if resource == "Amazon Simple Storage Service (S3)" or resource == "Amazon RDS":
         storages.append(resource)
         isStoragePresent = True
   
