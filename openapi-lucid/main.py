@@ -78,6 +78,12 @@ isExist = os.path.exists(path)
 if not isExist:
     os.mkdir(path)
 
+# Creates a new file
+with open(os.path.join(directory, 'main.tf'), 'w') as fp:
+    pass
+with open(os.path.join(directory, 'README.md'), 'w') as fp:
+    pass
+
 if isComputePresent == True and isAPIAccessPresent == True:
     # argument
     query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
@@ -97,7 +103,6 @@ if isComputePresent == True and isAPIAccessPresent == True:
     print(code_answer)
     # Python program to demonstrate
     # writing to file
-    
     # Opening a file
     file1 = open(os.path.join(directory, 'main.tf'), 'w')
     s = code_answer
