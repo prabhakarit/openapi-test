@@ -57,6 +57,15 @@ for resource in resources:
     if resource == "S3" or resource == "RDS":
         storages.append(resource)
         isStoragePresent = True
+  
+# Parent Directory path
+parent_dir = "../projects/lucid/"
+
+# Path
+path = os.path.join(parent_dir, directory)
+isExist = os.path.exists(path)
+if not isExist:
+    os.mkdir(path)
 
 if isComputePresent == True and isAPIAccessPresent == True:
     # argument
@@ -79,7 +88,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     # writing to file
     
     # Opening a file
-    file1 = open('../projects/lucid/'+directory+'/main.tf', 'w')
+    file1 = open(os.path.join(directory, 'main.tf'), 'w')
     s = code_answer
     
     # Writing a string to file
@@ -95,7 +104,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open('../projects/lucid/'+directory+'/README.md', 'w')
+    file2 = open(os.path.join(directory, 'README.md'), 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 if isComputePresent == True and isStoragePresent == True:
@@ -119,7 +128,7 @@ if isComputePresent == True and isStoragePresent == True:
     # writing to file
     
     # Opening a file
-    file1 = open('../projects/lucid/'+directory+'/main.tf', 'w')
+    file1 = open(os.path.join(directory, 'main.tf'), 'w')
     s = code_answer
     
     # Writing a string to file
@@ -135,7 +144,7 @@ if isComputePresent == True and isStoragePresent == True:
     guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open('../projects/lucid/'+directory+'/README.md', 'w')
+    file2 = open(os.path.join(directory, 'README.md'), 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 

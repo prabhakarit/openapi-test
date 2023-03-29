@@ -60,14 +60,14 @@ jobs:
           pip3.10 install aiohttp
           pip3.10 install --ignore-installed pyOpenSSL==22.0.0
           pip3.10 install openai
-          if [[ ! -d ../projects/lucid/${{ github.event.inputs.filename }} ]]
-          then
-              mkdir ../projects/lucid/${{ github.event.inputs.filename }}
-          fi
-          if [[ ! -f ../projects/lucid/${{ github.event.inputs.filename }}/main.tf ]]
-          then
-              touch ../projects/lucid/${{ github.event.inputs.filename }}/main.tf
-          fi
+          # if [[ ! -d ../projects/lucid/${{ github.event.inputs.filename }} ]]
+          # then
+          #     mkdir ../projects/lucid/${{ github.event.inputs.filename }}
+          # fi
+          # if [[ ! -f ../projects/lucid/${{ github.event.inputs.filename }}/main.tf ]]
+          # then
+          #     touch ../projects/lucid/${{ github.event.inputs.filename }}/main.tf
+          # fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
           python3  main.py -d ${{ github.event.inputs.filename }} -p ${{ github.event.inputs.preference }}
           cd ../
