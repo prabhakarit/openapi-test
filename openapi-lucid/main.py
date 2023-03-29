@@ -79,9 +79,9 @@ if not isExist:
     os.mkdir(path)
 
 # Creates a new file
-with open(os.path.join(directory, 'main.tf'), 'w') as fp:
+with open(os.path.join(path, 'main.tf'), 'w') as fp:
     pass
-with open(os.path.join(directory, 'README.md'), 'w') as fp:
+with open(os.path.join(path, 'README.md'), 'w') as fp:
     pass
 
 if isComputePresent == True and isAPIAccessPresent == True:
@@ -104,7 +104,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     # Python program to demonstrate
     # writing to file
     # Opening a file
-    file1 = open(os.path.join(directory, 'main.tf'), 'w')
+    file1 = open(os.path.join(path, 'main.tf'), 'w')
     s = code_answer
     
     # Writing a string to file
@@ -120,7 +120,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open(os.path.join(directory, 'README.md'), 'w')
+    file2 = open(os.path.join(path, 'README.md'), 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 if isComputePresent == True and isStoragePresent == True:
@@ -144,7 +144,7 @@ if isComputePresent == True and isStoragePresent == True:
     # writing to file
     
     # Opening a file
-    file1 = open(os.path.join(directory, 'main.tf'), 'w')
+    file1 = open(os.path.join(path, 'main.tf'), 'w')
     s = code_answer
     
     # Writing a string to file
@@ -160,7 +160,7 @@ if isComputePresent == True and isStoragePresent == True:
     guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
     msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
     # Writing readme file
-    file2 = open(os.path.join(directory, 'README.md'), 'w')
+    file2 = open(os.path.join(path, 'README.md'), 'w')
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
