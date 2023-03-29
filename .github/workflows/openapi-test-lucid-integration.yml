@@ -18,7 +18,7 @@ on:
       filename:
         description: 'file name of lucid document ?'     
         required: true
-        default: 'basic-api'
+        default: 'basic-apigateway-lambda'
         type: string
       filefolder:
         description: 'file folder of lucid ?'     
