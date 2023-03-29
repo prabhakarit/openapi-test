@@ -1,0 +1,6 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Status,Text Area 1,Comments
+1,Document,,,,,,,,,Draft,basic-alb-ec2,
+2,Page,,,,,,,,,,Page 1,
+3,Application Load Balancer,AWS Architecture 2019,2,,,,,,,,Application Load Balancer,
+4,Amazon EC2,AWS Architecture 2019,2,,,,,,,,Amazon EC2,
+5,Line,,2,,,3,4,None,Arrow,,,
