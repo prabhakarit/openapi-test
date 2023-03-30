@@ -67,7 +67,7 @@ jobs:
               touch ../s3-website/index.html
           fi
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          python3  api-call-test.py
+          python3  api-call-s3Website-cloudfront.py
           cd ../
       - name: Set up Git user
         run: |
