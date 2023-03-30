@@ -5,7 +5,6 @@ import sys
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--directory', nargs='+', required=True, action='store', dest='directory', default=False, help="provide directory name")
-parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default='terraform', choices=['terraform', 'serverless'], help="provide devops preference")
 args=parser.parse_args()
 alldirs = args.directory
 directory=alldirs[0]
