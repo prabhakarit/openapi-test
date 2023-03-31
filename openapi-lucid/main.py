@@ -6,11 +6,11 @@ import sys
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--directory', nargs='+', required=True, action='store', dest='directory', default=False, help="provide directory name")
-parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default='terraform', choices=['terraform', 'serverless'], help="provide devops preference")
 args=parser.parse_args()
 alldirs = args.directory
 directory=alldirs[0]
 print(f'directory = {directory}')
+parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default='terraform', choices=['terraform', 'serverless'], help="provide devops preference")
 allPrefs = args.preference
 preference=allPrefs[0]
 print(f'preference = {preference}')
@@ -41,6 +41,7 @@ with open('../lucid-files/'+directory+'.csv') as csv_file:
 api_access = ['Application Load Balancer',  'Amazon API Gateway']
 compute = ["Amazon EC2", "AWS Lambda"]
 storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS", "Amazon DynamoDB"]
+serverless = ['AWS Lambda']
 
 apiAccesses = []
 computes = []
@@ -49,7 +50,10 @@ storages = []
 isComputePresent = False
 isAPIAccessPresent = False
 isStoragePresent = False
+isAllServerlessPresent = False
 for resource in resources:
+    if resource not in serverless:
+        isAllServerlessPresent = True
     if resource == "AWS Lambda" or resource == "Amazon EC2":
         computes.append(resource)
         isComputePresent = True
@@ -84,7 +88,7 @@ with open(os.path.join(path, 'main.tf'), 'w') as fp:
 with open(os.path.join(path, 'README.md'), 'w') as fp:
     pass
 
-if isComputePresent == True and isAPIAccessPresent == True:
+if isComputePresent and isAPIAccessPresent and not isAllServerlessPresent:
     # argument
     query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
 
@@ -124,7 +128,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
-if isComputePresent == True and isStoragePresent == True:
+if isComputePresent == True and isStoragePresent == True and not isAllServerlessPresent:
     # argument
     query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
 
