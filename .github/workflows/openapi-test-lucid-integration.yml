@@ -61,7 +61,11 @@ jobs:
           pip3.10 install --ignore-installed pyOpenSSL==22.0.0
           pip3.10 install openai
           export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          python3  main.py -d ${{ github.event.inputs.filename }} -p ${{ github.event.inputs.preference }}
+          if [ ${{ github.event.inputs.preference }} == "terraform" ]; then
+            python3  main.py -d ${{ github.event.inputs.filename }} -p ${{ github.event.inputs.preference }}
+          else
+            python3  main-serverless.py -d ${{ github.event.inputs.filename }} -p ${{ github.event.inputs.preference }}
+          fi
           cd ../
       - name: Set up Git user
         run: |
