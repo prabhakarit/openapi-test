@@ -10,7 +10,7 @@ args=parser.parse_args()
 alldirs = args.directory
 directory=alldirs[0]
 print(f'directory = {directory}')
-parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default='terraform', choices=['terraform', 'serverless'], help="provide devops preference")
+parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default=False, help="provide devops preference")
 allPrefs = args.preference
 preference=allPrefs[0]
 print(f'preference = {preference}')
