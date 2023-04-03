@@ -45,7 +45,6 @@ with open('../lucid-files/'+directory+'.csv') as csv_file:
 api_access = ['Application Load Balancer',  'Amazon API Gateway']
 compute = ["Amazon EC2", "AWS Lambda"]
 storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS", "Amazon DynamoDB"]
-serverless = ['AWS Lambda']
 
 apiAccesses = []
 computes = []
@@ -54,10 +53,7 @@ storages = []
 isComputePresent = False
 isAPIAccessPresent = False
 isStoragePresent = False
-isAllServerlessPresent = False
 for resource in resources:
-    if resource not in serverless:
-        isAllServerlessPresent = True
     if resource == "AWS Lambda" or resource == "Amazon EC2":
         computes.append(resource)
         isComputePresent = True
@@ -92,7 +88,7 @@ with open(os.path.join(path, 'main.tf'), 'w') as fp:
 with open(os.path.join(path, 'README.md'), 'w') as fp:
     pass
 
-if isComputePresent and isAPIAccessPresent and not isAllServerlessPresent:
+if isComputePresent and isAPIAccessPresent:
     # argument
     query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
 
