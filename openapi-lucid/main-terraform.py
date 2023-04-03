@@ -5,15 +5,19 @@ import os
 import sys
 
 parser=argparse.ArgumentParser()
-parser.add_argument('-d', '--directory', nargs='+', required=True, action='store', dest='directory', default=False, help="provide directory name")
-parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default='terraform', choices=['terraform', 'serverless'], help="provide devops preference")
+parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
+parser.add_argument('-d', '--outputdir', nargs='+', required=True, action='store', dest='outputdir', default=False, help="provide output directory name")
+parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default=False, help="provide devops preference")
 args=parser.parse_args()
-alldirs = args.directory
+alldirs = args.csvFile
 directory=alldirs[0]
 print(f'directory = {directory}')
 allPrefs = args.preference
 preference=allPrefs[0]
 print(f'preference = {preference}')
+outputdir = args.outputdir
+output=outputdir[0]
+print(f'outputdir = {output}')
 
 resources = []
 
@@ -68,7 +72,7 @@ for resource in resources:
 parent_dir = "../projects/lucid/"
 
 # Path
-path = os.path.join(parent_dir, directory)
+path = os.path.join(parent_dir, output)
 
 isExist = os.path.exists("../projects/")
 if not isExist:
