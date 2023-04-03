@@ -6,7 +6,7 @@ import sys
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
-parser.add_argument('-d', '--outputdir', nargs='+', required=True, action='store', dest='outputdir', default=False, help="provide output directory name")
+parser.add_argument('-o', '--outputdir', nargs='+', required=True, action='store', dest='outputdir', default=False, help="provide output directory name")
 parser.add_argument('-p', '--preference', nargs='+', required=True, action='store', dest='preference', default=False, help="provide devops preference")
 args=parser.parse_args()
 alldirs = args.csvFile
