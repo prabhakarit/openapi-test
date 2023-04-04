@@ -57,17 +57,24 @@ isAPIAccessPresent = False
 isStoragePresent = False
 isAllServerlessPresent = False
 for resource in resources:
-    if resource not in serverless:
-        isAllServerlessPresent = True
-    if resource == "AWS Lambda" or resource == "Amazon EC2":
+    if resource in compute:
         computes.append(resource)
         isComputePresent = True
-    if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
+    if resource in api_access:
         apiAccesses.append(resource)
         isAPIAccessPresent = True
-    if resource == "Amazon Simple Storage Service (S3)" or resource == "Amazon RDS" or resource == "Amazon DynamoDB":
+    if resource in storage:
         storages.append(resource)
         isStoragePresent = True
+    # if resource == "AWS Lambda" or resource == "Amazon EC2":
+    #     computes.append(resource)
+    #     isComputePresent = True
+    # if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
+    #     apiAccesses.append(resource)
+    #     isAPIAccessPresent = True
+    # if resource == "Amazon Simple Storage Service (S3)" or resource == "Amazon RDS" or resource == "Amazon DynamoDB":
+    #     storages.append(resource)
+    #     isStoragePresent = True
   
 # Parent Directory path
 parent_dir = "../projects/lucid/"

@@ -56,13 +56,13 @@ isComputePresent = False
 isAPIAccessPresent = False
 isStoragePresent = False
 for resource in resources:
-    if resource == "AWS Lambda" or resource == "Amazon EC2":
+    if resource in compute:
         computes.append(resource)
         isComputePresent = True
-    if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
+    if resource in api_access:
         apiAccesses.append(resource)
         isAPIAccessPresent = True
-    if resource == "Amazon Simple Storage Service (S3)" or resource == "Amazon RDS" or resource == "Amazon DynamoDB":
+    if resource in storage:
         storages.append(resource)
         isStoragePresent = True
   
