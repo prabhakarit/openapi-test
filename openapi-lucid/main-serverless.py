@@ -92,7 +92,7 @@ with open(os.path.join(path, 'main.tf'), 'w') as fp:
 with open(os.path.join(path, 'README.md'), 'w') as fp:
     pass
 
-if isComputePresent and isAPIAccessPresent and not isAllServerlessPresent:
+if isComputePresent == True and isAPIAccessPresent == True :
     # argument
     query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
 

@@ -88,7 +88,7 @@ with open(os.path.join(path, 'main.tf'), 'w') as fp:
 with open(os.path.join(path, 'README.md'), 'w') as fp:
     pass
 
-if isComputePresent and isAPIAccessPresent:
+if isComputePresent == True and isAPIAccessPresent == True:
     # argument
     query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
 
@@ -96,13 +96,13 @@ if isComputePresent and isAPIAccessPresent:
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     completion = openai.ChatCompletion.create(
-    temperature=0.1,
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": query}]
+        temperature=0.1,
+        model="gpt-3.5-turbo", 
+        messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
     print("chatgpt answer => ", answer)
-    print("code answer => ", completion.choices[0].message.content)
+    #print("code answer => ", completion.choices[0].message.content)
     tokens = answer.split('```')
     code_answer = tokens[1]
     print(code_answer)
@@ -129,7 +129,7 @@ if isComputePresent and isAPIAccessPresent:
     file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
     file2.close()
 
-if isComputePresent == True and isStoragePresent == True and not isAllServerlessPresent:
+if isComputePresent == True and isStoragePresent == True :
     # argument
     query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
 
