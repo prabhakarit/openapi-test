@@ -3,6 +3,8 @@ import csv
 import openai
 import os
 import sys
+from pathlib import Path
+import shutil
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
@@ -22,7 +24,6 @@ print(f'outputdir = {output}')
 resources = []
 
 # create map object
-
 
 with open('../lucid-files/'+directory+'.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -85,6 +86,11 @@ if not isExist:
 isExist = os.path.exists(path)
 if not isExist:
     os.mkdir(path)
+
+# remove folder if exists
+dirpath = Path(parent_dir) / output
+if dirpath.exists() and dirpath.is_dir():
+    shutil.rmtree(dirpath)
 
 # Creates a new file
 with open(os.path.join(path, 'main.tf'), 'w') as fp:
