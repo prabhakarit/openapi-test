@@ -90,14 +90,14 @@ isExist = os.path.exists(parent_dir)
 if not isExist:
     os.mkdir(parent_dir)
 
-isExist = os.path.exists(path)
-if not isExist:
-    os.mkdir(path)
-
 # remove folder if exists
 dirpath = Path(parent_dir) / output
 if dirpath.exists() and dirpath.is_dir():
     shutil.rmtree(dirpath)
+
+isExist = os.path.exists(path)
+if not isExist:
+    os.mkdir(path)
 
 # Creates a new file
 with open(os.path.join(path, 'main.tf'), 'w') as fp:
