@@ -101,7 +101,8 @@ if isComputePresent and isAPIAccessPresent:
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
-    print(completion.choices[0].message.content)
+    print("chatgpt answer => ", answer)
+    print("code answer => ", completion.choices[0].message.content)
     tokens = answer.split('```')
     code_answer = tokens[1]
     print(code_answer)
