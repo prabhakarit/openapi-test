@@ -16,7 +16,7 @@ resource "aws_lambda_function" "example_lambda" {
 
 # Create the IAM role for the Lambda function
 resource "aws_iam_role" "lambda_role" {
-  name = "example_lambda_role"
+  name = "lambda_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -33,7 +33,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 # Attach the necessary policies to the IAM role
-resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   role       = aws_iam_role.lambda_role.name
 }
