@@ -5,4 +5,4 @@ Here is an example Terraform code to deploy an AWS Lambda function behind an Ama
 
 
 
-This code creates an AWS Lambda function, an IAM role for the function, an Amazon API Gateway, and the necessary resources to connect the Lambda function to the API Gateway. The output of the code is the endpoint URL of the API Gateway.
+This code creates an AWS Lambda function, an IAM role for the function, an Amazon API Gateway, and a resource, method, integration, and deployment for the API Gateway. The Lambda function is invoked by the API Gateway integration when a POST request is made to the /example endpoint.
