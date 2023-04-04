@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 import shutil
 
+select_model = "text-adda-001"
+
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
 parser.add_argument('-o', '--outputdir', nargs='+', required=True, action='store', dest='outputdir', default=False, help="provide output directory name")
@@ -46,35 +48,36 @@ with open('../lucid-files/'+directory+'.csv') as csv_file:
 api_access = ['Application Load Balancer',  'Amazon API Gateway']
 compute = ["Amazon EC2", "AWS Lambda"]
 storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS", "Amazon DynamoDB"]
-serverless = ['AWS Lambda']
+primary_serverless = ['AWS Lambda']
+secondary_serverless = ['Amazon API Gateway']
 
 apiAccesses = []
 computes = []
 storages = []
+primary_serverless_list = []
+secondary_serverless_list = []
 
 isComputePresent = False
 isAPIAccessPresent = False
 isStoragePresent = False
-isAllServerlessPresent = False
+isPrimaryServerlessPresent = False
+isSecondaryServerlessPresent = False
 for resource in resources:
     if resource in compute:
+        if resource in primary_serverless:
+            primary_serverless_list.append(resource)
+            isPrimaryServerlessPresent = True
         computes.append(resource)
         isComputePresent = True
     if resource in api_access:
+        if resource in secondary_serverless:
+            secondary_serverless_list.append(resource)
+            isSecondaryServerlessPresent = True
         apiAccesses.append(resource)
         isAPIAccessPresent = True
     if resource in storage:
         storages.append(resource)
         isStoragePresent = True
-    # if resource == "AWS Lambda" or resource == "Amazon EC2":
-    #     computes.append(resource)
-    #     isComputePresent = True
-    # if resource == "Application Load Balancer" or resource == "Amazon API Gateway":
-    #     apiAccesses.append(resource)
-    #     isAPIAccessPresent = True
-    # if resource == "Amazon Simple Storage Service (S3)" or resource == "Amazon RDS" or resource == "Amazon DynamoDB":
-    #     storages.append(resource)
-    #     isStoragePresent = True
   
 # Parent Directory path
 parent_dir = "../projects/lucid/"
@@ -114,7 +117,7 @@ if isComputePresent == True and isAPIAccessPresent == True :
 
     completion = openai.ChatCompletion.create(
     temperature=0.1,
-    model="gpt-3.5-turbo", 
+    model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
@@ -154,7 +157,7 @@ if isComputePresent == True and isStoragePresent == True and not isAllServerless
 
     completion = openai.ChatCompletion.create(
     temperature=0.1,
-    model="gpt-3.5-turbo", 
+    model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
@@ -191,7 +194,7 @@ if isAPIAccessPresent == True and isStoragePresent == True:
 
     completion = openai.ChatCompletion.create(
     temperature=0.1,
-    model="gpt-3.5-turbo", 
+    model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content

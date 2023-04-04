@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 import shutil
 
+select_model = "text-adda-001"
+
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
 parser.add_argument('-o', '--outputdir', nargs='+', required=True, action='store', dest='outputdir', default=False, help="provide output directory name")
@@ -105,7 +107,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     completion = openai.ChatCompletion.create(
         temperature=0.1,
         #model="gpt-3.5-turbo", 
-        model="text-adda-001", 
+        model=select_model, 
         messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
@@ -146,7 +148,7 @@ if isComputePresent == True and isStoragePresent == True :
 
     completion = openai.ChatCompletion.create(
     temperature=0.1,
-    model="gpt-3.5-turbo", 
+    model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
@@ -183,7 +185,7 @@ if isAPIAccessPresent == True and isStoragePresent == True:
 
     completion = openai.ChatCompletion.create(
     temperature=0.1,
-    model="gpt-3.5-turbo", 
+    model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
     answer = completion.choices[0].message.content
