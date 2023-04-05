@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 
 select_model = "text-ada-001"
+select_model_code_search_ada = "code-search-ada-*-001"
 select_temperature = 0.1
 
 parser=argparse.ArgumentParser()
@@ -118,9 +119,11 @@ if isComputePresent == True and isAPIAccessPresent == True :
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
         completion = openai.ChatCompletion.create(
-        temperature=select_temperature,
-        model=select_model, 
-        messages=[{"role": "user", "content": query}]
+            temperature=select_temperature,
+            model=select_model_code_search_ada,
+            messages=[
+                {"role": "user", "content": query}
+            ]
         )
         answer = completion.choices[0].message.content
         #print(completion.choices[0].message.content)
@@ -158,9 +161,9 @@ if isComputePresent == True and isAPIAccessPresent == True :
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
         completion = openai.ChatCompletion.create(
-        temperature=select_temperature,
-        model=select_model, 
-        messages=[{"role": "user", "content": query}]
+            temperature=select_temperature,
+            model=select_model_code_search_ada, 
+            messages=[{"role": "user", "content": query}]
         )
         answer = completion.choices[0].message.content
         #print(completion.choices[0].message.content)
@@ -192,7 +195,7 @@ if isComputePresent == True and isAPIAccessPresent == True :
 
             completion = openai.ChatCompletion.create(
             temperature=select_temperature,
-            model=select_model, 
+            model=select_model_code_search_ada, 
             messages=[{"role": "user", "content": query}]
             )
             answer = completion.choices[0].message.content
