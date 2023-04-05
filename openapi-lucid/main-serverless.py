@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 
 select_model = "text-ada-001"
-select_model_code_search_ada = "code-search-ada-*-001"
+select_model_code_search_ada = "code-search-ada-code-001"
 select_temperature = 0.1
 
 parser=argparse.ArgumentParser()
