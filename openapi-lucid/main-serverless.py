@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 import shutil
 
-select_model = "text-adda-001"
+select_model = "text-ada-001"
 select_temperature = 0
 
 parser=argparse.ArgumentParser()

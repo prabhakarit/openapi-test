@@ -3,7 +3,7 @@ import openai
 import os
 import sys
 
-select_model = "text-adda-001"
+select_model = "text-ada-001"
 select_temperature = 0
 
 parser=argparse.ArgumentParser()
