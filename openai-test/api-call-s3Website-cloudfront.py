@@ -2,6 +2,9 @@ import openai
 import os
 import sys
 
+select_model = "text-adda-001"
+select_temperature = 0
+
 # argument
 query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"
 
@@ -9,8 +12,8 @@ query = "write github actions to update to AWS s3 website and invalidate amazon 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 completion = openai.ChatCompletion.create(
-  temperature=0.1,
-  model="gpt-3.5-turbo", 
+  temperature=select_temperature,
+  model=select_model, 
   messages=[{"role": "user", "content": query}]
 )
 answer = completion.choices[0].message.content

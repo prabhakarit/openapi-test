@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 
 select_model = "text-adda-001"
+select_temperature = 0
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")
@@ -105,7 +106,7 @@ if isComputePresent == True and isAPIAccessPresent == True:
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     completion = openai.ChatCompletion.create(
-        temperature=0.1,
+        temperature=select_temperature,
         #model="gpt-3.5-turbo", 
         model=select_model, 
         messages=[{"role": "user", "content": query}]
@@ -147,7 +148,7 @@ if isComputePresent == True and isStoragePresent == True :
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     completion = openai.ChatCompletion.create(
-    temperature=0.1,
+    temperature=select_temperature,
     model=select_model, 
     messages=[{"role": "user", "content": query}]
     )
@@ -184,7 +185,7 @@ if isAPIAccessPresent == True and isStoragePresent == True:
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     completion = openai.ChatCompletion.create(
-    temperature=0.1,
+    temperature=select_temperature,
     model=select_model, 
     messages=[{"role": "user", "content": query}]
     )

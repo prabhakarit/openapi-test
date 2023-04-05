@@ -2,6 +2,9 @@ import openai
 import os
 import sys
 
+select_model = "text-adda-001"
+select_temperature = 0
+
 # argument
 query = "create github actions workflow to run terraform init plan deploy to AWS"
 
@@ -9,8 +12,8 @@ query = "create github actions workflow to run terraform init plan deploy to AWS
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 completion = openai.ChatCompletion.create(
-  temperature=0.1,
-  model="gpt-3.5-turbo", 
+  temperature=select_temperature,
+  model=select_model, 
   messages=[{"role": "user", "content": query}]
 )
 answer = completion.choices[0].message.content
