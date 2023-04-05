@@ -103,49 +103,160 @@ isExist = os.path.exists(path)
 if not isExist:
     os.mkdir(path)
 
-# Creates a new file
-with open(os.path.join(path, 'main.tf'), 'w') as fp:
-    pass
-with open(os.path.join(path, 'README.md'), 'w') as fp:
-    pass
-
 if isComputePresent == True and isAPIAccessPresent == True :
-    # argument
-    query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
+    if isPrimaryServerlessPresent == True:
+        # query
+        query = "serverless framework yaml code for nodejs "+ computes[0] +", " + apiAccesses[0]
 
-    # Load your API key from an environment variable or secret management service
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+        # Creates a new file
+        with open(os.path.join(path, 'serverless.yml'), 'w') as fp:
+            pass
+        with open(os.path.join(path, 'README.md'), 'w') as fp:
+            pass
 
-    completion = openai.ChatCompletion.create(
-    temperature=select_temperature,
-    model=select_model, 
-    messages=[{"role": "user", "content": query}]
-    )
-    answer = completion.choices[0].message.content
-    #print(completion.choices[0].message.content)
-    tokens = answer.split('```')
-    code_answer = tokens[1]
-    print(code_answer)
-    # Python program to demonstrate
-    # writing to file
-    # Opening a file
-    file1 = open(os.path.join(path, 'main.tf'), 'w')
-    s = code_answer
+        # Load your API key from an environment variable or secret management service
+        openai.api_key = os.getenv("OPENAI_API_KEY")
+
+        completion = openai.ChatCompletion.create(
+        temperature=select_temperature,
+        model=select_model, 
+        messages=[{"role": "user", "content": query}]
+        )
+        answer = completion.choices[0].message.content
+        #print(completion.choices[0].message.content)
+        tokens = answer.split('```')
+        code_answer = tokens[1]
+        print(code_answer)
+        # Python program to demonstrate
+        # writing to file
+        # Opening a file
+        file1 = open(os.path.join(path, 'serverless.yml'), 'w')
+        s = code_answer
+        
+        # Writing a string to file
+        file1.write(s)
+        
+        # Closing file
+        file1.close()
+
+        guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
+        msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
+        # Writing readme file
+        file2 = open(os.path.join(path, 'README.md'), 'w')
+        file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
+        file2.close()
+
+        # setup workflow for serverless deployment
+        # query
+        query = "github actions workflow code for serverless framework deployment"
+
+        # Creates a new file
+        with open(os.path.join(path, 'deployment-workflow.yml'), 'w') as fp:
+            pass
+
+        # Load your API key from an environment variable or secret management service
+        openai.api_key = os.getenv("OPENAI_API_KEY")
+
+        completion = openai.ChatCompletion.create(
+        temperature=select_temperature,
+        model=select_model, 
+        messages=[{"role": "user", "content": query}]
+        )
+        answer = completion.choices[0].message.content
+        #print(completion.choices[0].message.content)
+        tokens = answer.split('```')
+        code_answer = tokens[1]
+        print(code_answer)
+        # Python program to demonstrate
+        # writing to file
+        # Opening a file
+        file1 = open(os.path.join(path, 'deployment-workflow.yml'), 'w')
+        s = code_answer
+        
+        # Writing a string to file
+        file1.write(s)
+        
+        # Closing file
+        file1.close()
+
+        if isSecondaryServerlessPresent == False:
+            # query
+            query = "terraform code to create " + apiAccesses[0] + " with target " + computes[0]
+
+            # Creates a new file
+            with open(os.path.join(path, 'main.tf'), 'w') as fp:
+                pass
+
+            # Load your API key from an environment variable or secret management service
+            openai.api_key = os.getenv("OPENAI_API_KEY")
+
+            completion = openai.ChatCompletion.create(
+            temperature=select_temperature,
+            model=select_model, 
+            messages=[{"role": "user", "content": query}]
+            )
+            answer = completion.choices[0].message.content
+            #print(completion.choices[0].message.content)
+            tokens = answer.split('```')
+            code_answer = tokens[1]
+            print(code_answer)
+            # Python program to demonstrate
+            # writing to file
+            # Opening a file
+            file1 = open(os.path.join(path, 'main.tf'), 'w')
+            s = code_answer
+            
+            # Writing a string to file
+            file1.write(s)
+            
+            # Closing file
+            file1.close()
     
-    # Writing a string to file
-    file1.write(s)
-    
-    # Closing file
-    file1.close()
+    else :
+        # argument
+        query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
 
-    guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
-    msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
-    # Writing readme file
-    file2 = open(os.path.join(path, 'README.md'), 'w')
-    file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
-    file2.close()
+        # Creates a new file
+        with open(os.path.join(path, 'main.tf'), 'w') as fp:
+            pass
+        with open(os.path.join(path, 'README.md'), 'w') as fp:
+            pass
 
-if isComputePresent == True and isStoragePresent == True and not isAllServerlessPresent:
+        # Load your API key from an environment variable or secret management service
+        openai.api_key = os.getenv("OPENAI_API_KEY")
+
+        completion = openai.ChatCompletion.create(
+            temperature=select_temperature,
+            #model="gpt-3.5-turbo", 
+            model=select_model, 
+            messages=[{"role": "user", "content": query}]
+        )
+        answer = completion.choices[0].message.content
+        #print("chatgpt answer => ", answer)
+        #print("code answer => ", completion.choices[0].message.content)
+        tokens = answer.split('```')
+        code_answer = tokens[1]
+        print(code_answer)
+        # Python program to demonstrate
+        # writing to file
+        # Opening a file
+        file1 = open(os.path.join(path, 'main.tf'), 'w')
+        s = code_answer
+        
+        # Writing a string to file
+        file1.write(s)
+        
+        # Closing file
+        file1.close()
+
+        guidance = "\nPlease note that this is an experimental implementation. It can only provide a template as a suggestive start."
+        msgFromChatGPT = "\nFollowing is documentation passed by ChatGPT : \n"
+        # Writing readme file
+        file2 = open(os.path.join(path, 'README.md'), 'w')
+        file2.write(guidance + msgFromChatGPT + tokens[0] + tokens[2])
+        file2.close()
+
+if isComputePresent == True and isStoragePresent == True :
     # argument
     query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
 

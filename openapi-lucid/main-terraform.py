@@ -126,10 +126,6 @@ if isComputePresent == True and isAPIAccessPresent == True:
     # Writing a string to file
     file1.write(s)
     
-    # Writing multiple strings
-    # at a time
-    #file1.writelines(L)
-    
     # Closing file
     file1.close()
 
