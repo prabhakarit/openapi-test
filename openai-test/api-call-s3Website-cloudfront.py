@@ -3,7 +3,7 @@ import os
 import sys
 
 select_model = "text-ada-001"
-select_temperature = 0
+select_temperature = 0.1
 
 # argument
 query = "write github actions to update to AWS s3 website and invalidate amazon cloudfront"

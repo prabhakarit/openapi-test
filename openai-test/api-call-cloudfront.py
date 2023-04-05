@@ -3,7 +3,7 @@ import os
 import sys
 
 select_model = "text-ada-001"
-select_temperature = 0
+select_temperature = 0.1
 
 # argument
 query = "terraform main script to create cloudfront distribution for s3 website"

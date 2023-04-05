@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 
 select_model = "text-ada-001"
-select_temperature = 0
+select_temperature = 0.1
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--csvFile', nargs='+', required=True, action='store', dest='csvFile', default=False, help="provide input csv file name")

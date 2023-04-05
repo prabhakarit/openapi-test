@@ -4,7 +4,7 @@ import os
 import sys
 
 select_model = "text-ada-001"
-select_temperature = 0
+select_temperature = 0.1
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-d', '--directory', nargs='+', required=True, action='store', dest='directory', default=False, help="provide directory name")
