@@ -123,7 +123,10 @@ if isComputePresent == True and isAPIAccessPresent == True :
             model=select_model_code_search_ada,
             messages=[
                 {"role": "user", "content": query}
-            ]
+            ],
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
         answer = completion.choices[0].message.content
         #print(completion.choices[0].message.content)
