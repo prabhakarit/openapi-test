@@ -118,6 +118,9 @@ if isComputePresent == True and isAPIAccessPresent == True :
         # Load your API key from an environment variable or secret management service
         openai.api_key = os.getenv("OPENAI_API_KEY")
 
+        print("temperature = " + select_temperature)
+        print("model = " + select_model_code_search_ada)
+
         completion = openai.ChatCompletion.create(
             temperature=select_temperature,
             model=select_model_code_search_ada,
