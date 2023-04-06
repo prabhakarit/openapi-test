@@ -205,7 +205,7 @@ if isComputePresent == True and isAPIAccessPresent == True :
 
             completion = openai.ChatCompletion.create(
             temperature=select_temperature,
-            model=select_model_code_search_ada, 
+            model=select_model, 
             messages=[{"role": "user", "content": query}]
             )
             answer = completion.choices[0].message.content
