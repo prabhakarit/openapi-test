@@ -2,7 +2,8 @@ import openai
 import os
 import sys
 
-select_model = "text-ada-001"
+select_model_babbage001 = "text-babbage-001"
+select_model = select_model_babbage001
 select_temperature = 0.1
 
 # argument
