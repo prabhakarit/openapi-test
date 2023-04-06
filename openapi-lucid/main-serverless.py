@@ -6,8 +6,10 @@ import sys
 from pathlib import Path
 import shutil
 
-select_model = "text-ada-001"
+select_model_chatgpt35 = "gpt-3.5-turbo"
+select_model_text_ada = "text-ada-001"
 select_model_code_search_ada = "code-search-ada-code-001"
+select_model = select_model_chatgpt35
 select_temperature = 0.1
 
 parser=argparse.ArgumentParser()
@@ -123,7 +125,7 @@ if isComputePresent == True and isAPIAccessPresent == True :
 
         completion = openai.ChatCompletion.create(
             temperature=select_temperature,
-            model=select_model_code_search_ada,
+            model=select_model,
             messages=[
                 {"role": "user", "content": query}
             ],
@@ -168,7 +170,7 @@ if isComputePresent == True and isAPIAccessPresent == True :
 
         completion = openai.ChatCompletion.create(
             temperature=select_temperature,
-            model=select_model_code_search_ada, 
+            model=select_model, 
             messages=[{"role": "user", "content": query}]
         )
         answer = completion.choices[0].message.content
