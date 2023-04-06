@@ -1,0 +1,17 @@
+yaml
+service: my-service
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  alb:
+    targetGroupPrefix: my-service
+functions:
+  my-function:
+    handler: handler.myFunction
+    events:
+      - alb:
+          listenerArn: arn:aws:elasticloadbalancing:us-east-1:123456789012:listener/app/my-load-balancer/1234567890abcdef/1234567890abcdef
+          priority: 1
+          conditions:
+            path: /my-path
