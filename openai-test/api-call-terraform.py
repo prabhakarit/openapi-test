@@ -2,8 +2,9 @@ import openai
 import os
 import sys
 
+select_model_chatgpt35 = "gpt-3.5-turbo"
 select_model_babbage001 = "text-babbage-001"
-select_model = select_model_babbage001
+select_model = select_model_chatgpt35
 select_temperature = 0.1
 
 # argument
