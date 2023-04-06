@@ -1,9 +1,10 @@
-yaml
+
 service: my-service
+
 provider:
   name: aws
   runtime: nodejs14.x
-  region: us-east-1
+
 functions:
   hello:
     handler: handler.hello
@@ -11,3 +12,7 @@ functions:
       - http:
           path: /hello
           method: get
+
+plugins:
+  - serverless-offline
+
