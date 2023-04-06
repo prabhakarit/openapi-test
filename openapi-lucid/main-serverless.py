@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 import shutil
 
+select_model_babbage001 = "text-babbage-001"
 select_model_chatgpt35 = "gpt-3.5-turbo"
 select_model_chatgpt35_0301 = "gpt-3.5-turbo-0301"
 select_model_text_ada = "text-ada-001"
