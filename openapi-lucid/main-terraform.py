@@ -6,8 +6,9 @@ import sys
 from pathlib import Path
 import shutil
 
+select_model_chatgpt35 = "gpt-3.5-turbo"
 select_model_babbage001 = "text-babbage-001"
-select_model = select_model_babbage001
+select_model = select_model_chatgpt35
 select_temperature = select_model_babbage001
 
 parser=argparse.ArgumentParser()
