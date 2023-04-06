@@ -1,12 +1,12 @@
 
 Please note that this is an experimental implementation. It can only provide a template as a suggestive start.
 Following is documentation passed by ChatGPT : 
-Here is an example of a Serverless Framework YAML code for a Node.js AWS Lambda function with Amazon API Gateway:
+Here is an example of a Serverless Framework YAML code for a Node.js AWS Lambda function with an Amazon API Gateway:
 
 
 
-In this example, we define a service called "my-service" with the AWS provider. We specify the runtime as Node.js 14.x and the region as us-east-1.
+In this example, we define a service called "my-service" with the AWS provider. We specify that we want to use Node.js 14.x as the runtime and that our Lambda function should be deployed in the us-east-1 region.
 
-We define a function called "hello" with a handler function called "handler.hello". This function is triggered by an HTTP event with a path of "/hello" and a method of "get". This means that when a GET request is made to the "/hello" endpoint on the API Gateway, the "handler.hello" function will be executed.
+We define a single function called "hello" with a handler function called "handler.hello". This function is triggered by an HTTP GET request to the "/hello" path on the API Gateway.
 
-You can customize this YAML code to fit your specific use case.
+This YAML code can be used to deploy the Lambda function and API Gateway using the Serverless Framework.
