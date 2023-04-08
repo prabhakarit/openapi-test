@@ -1,0 +1,5 @@
+{
+    "provisioning": ["terraform"],
+    "cloudprovider": ["aws"],
+    "resource": ["cloudfront"]
+}

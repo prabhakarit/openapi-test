@@ -1,0 +1,5 @@
+{
+    "pipeline": ["github"],
+    "cloudprovider": ["aws"],
+    "resource": ["s3website"]
+}
