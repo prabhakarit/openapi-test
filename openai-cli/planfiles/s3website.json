@@ -1,8 +1,16 @@
 {
     "pipeline": {
-        "pipeline": "github",
+        "pipeline": "github actions workflow",
         "cloudprovider": ["aws"],
-        "resource": ["s3website"]
+        "resource": ["s3 website"]
     },
-    "provision": {}
+    "provision": { 
+        "provider": {
+            "shortlisted": ["terraform"],
+            "preferenceOrdered": true,
+            "ignore":["ansible"]
+        },
+        "cloudprovider": ["aws"],
+        "resources": ["cloudfront", "s3"]
+    }
 }

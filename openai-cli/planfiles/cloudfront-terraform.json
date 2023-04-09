@@ -7,6 +7,5 @@
         },
         "cloudprovider": ["aws"],
         "resources": ["cloudfront"]
-    },
-    "pipeline": {}
+    }
 }
