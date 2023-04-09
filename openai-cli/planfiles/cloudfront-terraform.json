@@ -1,5 +1,12 @@
 {
-    "provisioning": ["terraform"],
-    "cloudprovider": ["aws"],
-    "resource": ["cloudfront"]
+    "provision": { 
+        "provider": {
+            "shortlisted": ["terraform"],
+            "preferenceOrdered": true,
+            "ignore":["ansible"]
+        },
+        "cloudprovider": ["aws"],
+        "resources": ["cloudfront"]
+    },
+    "pipeline": {}
 }
