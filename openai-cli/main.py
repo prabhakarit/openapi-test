@@ -39,12 +39,12 @@ planfile = args.planfile
 if not (planfile is None) :
     planfilePath = str(planfile[0])
     if planfilePath != '': 
-        randomised_op_folder_name = './'+str(uuid.uuid4().hex)
-        isExist = os.path.exists(randomised_op_folder_name)
-        if not isExist:
-            os.mkdir(randomised_op_folder_name)
         print(planfilePath)
         with open(planfilePath, 'r') as fcc_file:
+            randomised_op_folder_name = './'+str(uuid.uuid4().hex)
+            isExist = os.path.exists(randomised_op_folder_name)
+            if not isExist:
+                os.mkdir(randomised_op_folder_name)
             # Opening JSON file
             fcc_data = json.load(fcc_file)
             # decide how to build query
@@ -73,15 +73,63 @@ lucidcsv = args.lucidcsv
 if not (lucidcsv is None) :
     lucidcsvPath = str(lucidcsv[0])
     if lucidcsvPath != '': 
-        randomised_op_folder_name = './'+str(uuid.uuid4().hex)
-        isExist = os.path.exists(randomised_op_folder_name)
-        if not isExist:
-            os.mkdir(randomised_op_folder_name)
-        print(lucidcsvPath)
-        # Opening JSON file
-        f = open(lucidcsvPath)
-        # query generated from lucid csv
-        query_increment = query_increment + 1
-        os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-lucidcsv.md' + ' --model="'+openai_model+'"')
-        
-        f.close()
+        with open(lucidcsvPath, 'r') as fcc_file:
+            randomised_op_folder_name = './'+str(uuid.uuid4().hex)
+            isExist = os.path.exists(randomised_op_folder_name)
+            if not isExist:
+                os.mkdir(randomised_op_folder_name)
+            print(lucidcsvPath)
+            # parse CSV
+            csv_reader = csv.reader(lucidcsvPath, delimiter=',')
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    print(f'Column names are {", ".join(row)}')
+                    line_count += 1
+                else:
+                    if row[1] == "Document" or row[1] == "Page" or row[1] == "Line":
+                        print(f'skipping for {row[1]}')
+                        continue
+                    else:
+                        resources.append(row[1])
+                        print(f'added {row[1]} to resource')
+                    line_count += 1
+            print(f'Processed {line_count} lines.')
+            print(f'Resources to be processed {resources}')
+            api_access = ['Application Load Balancer',  'Amazon API Gateway']
+            compute = ["Amazon EC2", "AWS Lambda"]
+            storage = ["Amazon Simple Storage Service (S3)", "Amazon RDS", "Amazon DynamoDB"]
+            primary_serverless = ['AWS Lambda']
+            secondary_serverless = ['Amazon API Gateway']
+
+            apiAccesses = []
+            computes = []
+            storages = []
+            primary_serverless_list = []
+            secondary_serverless_list = []
+
+            isComputePresent = False
+            isAPIAccessPresent = False
+            isStoragePresent = False
+            isPrimaryServerlessPresent = False
+            isSecondaryServerlessPresent = False
+            for resource in resources:
+                if resource in compute:
+                    if resource in primary_serverless:
+                        primary_serverless_list.append(resource)
+                        isPrimaryServerlessPresent = True
+                    computes.append(resource)
+                    isComputePresent = True
+                if resource in api_access:
+                    if resource in secondary_serverless:
+                        secondary_serverless_list.append(resource)
+                        isSecondaryServerlessPresent = True
+                    apiAccesses.append(resource)
+                    isAPIAccessPresent = True
+                if resource in storage:
+                    storages.append(resource)
+                    isStoragePresent = True
+            # query generated from lucid csv
+            query_increment = query_increment + 1
+            os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-lucidcsv.md' + ' --model="'+openai_model+'"')
+            
