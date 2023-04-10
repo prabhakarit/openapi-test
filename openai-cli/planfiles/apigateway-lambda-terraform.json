@@ -5,7 +5,7 @@
             "preferenceOrdered": true,
             "ignore":["ansible"]
         },
-        "cloudprovider": ["aws"],
-        "resources": ["lambda", "apigateway"]
+        "cloudprovider": ["AWS"],
+        "resources": ["Lambda", "API Gateway"]
     }
 }
