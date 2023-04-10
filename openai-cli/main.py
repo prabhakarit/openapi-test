@@ -66,7 +66,10 @@ if not (planfile is None) :
                     cloudprovider = fcc_data["provision"]["cloudprovider"][0]
                     resources = ""
                     for resource in fcc_data["provision"]["resources"]:
-                        resources = resources + ", " + cloudprovider + " " + resource
+                        if resources == '':
+                            resources = cloudprovider + " " + resource
+                        else :    
+                            resources = resources + ", " + cloudprovider + " " + resource
                     query = "get " + fcc_data["provision"]["provider"]["shortlisted"][0] + " for " + resources
                     print("Query for provisioning => " + query)
                     # query generated from plan file
