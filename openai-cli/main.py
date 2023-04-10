@@ -66,7 +66,7 @@ if not (planfile is None) :
                 query = "get " + pipeline + " for deploying " + cloudprovider + " " + resource
                 print("Query for pipeline => " + query)
                 query_increment = query_increment + 1
-                os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/s3-wesbite-deployment.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-pipeline.md' + ' --model="'+openai_model+'"')
+                os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/pipeline.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-pipeline.md' + ' --model="'+openai_model+'"')
 
 # For plan file
 lucidcsv = args.lucidcsv
@@ -129,7 +129,34 @@ if not (lucidcsv is None) :
                 if resource in storage:
                     storages.append(resource)
                     isStoragePresent = True
-            # query generated from lucid csv
-            query_increment = query_increment + 1
-            os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-lucidcsv.md' + ' --model="'+openai_model+'"')
-            
+            # for compute and api access
+            if isComputePresent == True and isAPIAccessPresent == True :
+                if isPrimaryServerlessPresent == True:
+                    # query
+                    query = "serverless framework yaml code for nodejs "+ computes[0] +", " + apiAccesses[0]
+                    os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/serverless.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-serverless.md' + ' --model="'+openai_model+'"')
+
+                    # setup workflow for serverless deployment
+                    # query
+                    query = "github actions workflow code for serverless framework deployment"
+                    os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/pipeline.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-pipeline.md' + ' --model="'+openai_model+'"')
+
+                    if isSecondaryServerlessPresent == False:
+                        # query
+                        query = "terraform code to create " + apiAccesses[0] + " with target " + computes[0]
+                        os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
+
+                else :
+                    # argument
+                    query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
+                    os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
+
+            if isComputePresent == True and isStoragePresent == True :
+                # argument
+                query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
+                os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
+
+            if isAPIAccessPresent == True and isStoragePresent == True:
+                # argument
+                query = "terraform code to create "+ apiAccesses[0] +" and " + storages[0]
+                os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')  
