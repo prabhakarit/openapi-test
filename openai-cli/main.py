@@ -32,7 +32,20 @@ if not (queryText is None) :
             os.mkdir(randomised_op_folder_name)
         # print(freeTextQuery)
         query_increment = query_increment + 1
-        os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-query.md' + ' --model="'+openai_model+'"')
+        extension = '.tf'
+        if 'terraform' in freeTextQuery:
+            extension = '.tf'
+        if 'python' in freeTextQuery:
+            extension = '.py'
+        if 'java' in freeTextQuery:
+            extension = '.java'
+        if 'nodejs' in freeTextQuery:
+            extension = '.js'
+        if 'javascript' in freeTextQuery:
+            extension = '.js'
+        if 'github actions' in freeTextQuery:
+            extension = '.yml'
+        os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.'+ extension +' --readme-file='+randomised_op_folder_name+'/readme-query.md' + ' --model="'+openai_model+'"')
 
 # For plan file
 planfile = args.planfile
@@ -69,9 +82,10 @@ if not (planfile is None) :
                 os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/pipeline.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-pipeline.md' + ' --model="'+openai_model+'"')
 
 # For plan file
-lucidcsv = args.lucidcsv
-if not (lucidcsv is None) :
-    lucidcsvPath = str(lucidcsv[0])
+lucidcsvList = args.lucidcsv
+if not (lucidcsvList is None) :
+    lucidcsvPath = str(lucidcsvList[0])
+    resources = []
     if lucidcsvPath != '': 
         with open(lucidcsvPath, 'r') as fcc_file:
             randomised_op_folder_name = './'+str(uuid.uuid4().hex)
@@ -80,7 +94,7 @@ if not (lucidcsv is None) :
                 os.mkdir(randomised_op_folder_name)
             print(lucidcsvPath)
             # parse CSV
-            csv_reader = csv.reader(lucidcsvPath, delimiter=',')
+            csv_reader = csv.reader(fcc_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:
@@ -133,30 +147,30 @@ if not (lucidcsv is None) :
             if isComputePresent == True and isAPIAccessPresent == True :
                 if isPrimaryServerlessPresent == True:
                     # query
-                    query = "serverless framework yaml code for nodejs "+ computes[0] +", " + apiAccesses[0]
+                    query = "get serverless framework yaml for nodejs "+ computes[0] +", " + apiAccesses[0]
                     os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/serverless.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-serverless.md' + ' --model="'+openai_model+'"')
 
                     # setup workflow for serverless deployment
                     # query
-                    query = "github actions workflow code for serverless framework deployment"
+                    query = "get github actions workflow for serverless framework deployment"
                     os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/pipeline.yml ' + ' --readme-file='+randomised_op_folder_name+'/readme-pipeline.md' + ' --model="'+openai_model+'"')
 
                     if isSecondaryServerlessPresent == False:
                         # query
-                        query = "terraform code to create " + apiAccesses[0] + " with target " + computes[0]
+                        query = "get terraform for " + apiAccesses[0] + " with target " + computes[0]
                         os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
 
                 else :
                     # argument
-                    query = "terraform code to deploy "+ computes[0] +" behind " + apiAccesses[0]
+                    query = "get terraform for "+ computes[0] +" behind " + apiAccesses[0]
                     os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
 
             if isComputePresent == True and isStoragePresent == True :
                 # argument
-                query = "terraform code to deploy "+ computes[0] +" with " + storages[0]
+                query = "get terraform for "+ computes[0] +" with " + storages[0]
                 os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')
 
             if isAPIAccessPresent == True and isStoragePresent == True:
                 # argument
-                query = "terraform code to create "+ apiAccesses[0] +" and " + storages[0]
+                query = "get terraform for "+ apiAccesses[0] +" and " + storages[0]
                 os.system("aiac " + query + ' --output-file='+randomised_op_folder_name+'/main.tf ' + ' --readme-file='+randomised_op_folder_name+'/readme-provision.md' + ' --model="'+openai_model+'"')  

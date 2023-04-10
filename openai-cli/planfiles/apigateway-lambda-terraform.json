@@ -1,0 +1,11 @@
+{
+    "provision": { 
+        "provider": {
+            "shortlisted": ["terraform"],
+            "preferenceOrdered": true,
+            "ignore":["ansible"]
+        },
+        "cloudprovider": ["aws"],
+        "resources": ["lambda", "apigateway"]
+    }
+}
