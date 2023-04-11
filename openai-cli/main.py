@@ -9,6 +9,8 @@ import os
 import uuid
 import json
 
+yml_list = ["github actions", "SAM", "Serverless Application Model", "sam", "serverless application model"]
+
 openai_model = "gpt-3.5-turbo-0301"
 
 query_increment = 0
@@ -43,7 +45,7 @@ if not (queryText is None) :
             extension = '.js'
         if 'javascript' in freeTextQuery:
             extension = '.js'
-        if 'github actions' in freeTextQuery:
+        if 'github actions' in freeTextQuery or 'Serverless Application Model' in freeTextQuery or 'SAM' in freeTextQuery or 'sam' in freeTextQuery or 'serverless application model' in freeTextQuery:
             extension = '.yml'
         os.system("aiac " + freeTextQuery + ' --output-file='+randomised_op_folder_name+'/main.'+ extension +' --readme-file='+randomised_op_folder_name+'/readme-query.md' + ' --model="'+openai_model+'"')
 
